@@ -50,7 +50,8 @@ node_website = request.XenVM('website')
 node_website.startVNC()
 node_website.routable_control_ip = True
 node_website.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU18-64-STD'
-node_website.Site("site2")
+node_website.Site("site1")
+# keep it all at one site to minimize resource usage
 
 # Link link-0
 link_0 = request.Link('link-0')
