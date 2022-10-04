@@ -33,7 +33,7 @@ node_client_1.startVNC()
 node_client_1.routable_control_ip = True
 node_client_1.Site("site1")
 
-iface1 = node_client_1.addInterface('interface-2', pg.IPv4Address('0.0.0.0','255.255.255.0'))
+iface1 = node_client_1.addInterface('interface-2') #, pg.IPv4Address('0.0.0.0','255.255.255.0'))
 
 # Node client-2
 node_client_2 = request.XenVM('client-2')
@@ -43,7 +43,7 @@ node_client_2.routable_control_ip = True
 
 node_client_2.Site("site1")
 
-iface2 = node_client_2.addInterface('interface-0', pg.IPv4Address('0.0.0.0','255.255.255.0'))
+iface2 = node_client_2.addInterface('interface-0') #, pg.IPv4Address('0.0.0.0','255.255.255.0'))
 
 # Node website
 node_website = request.XenVM('website')
