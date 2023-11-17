@@ -26,7 +26,7 @@ iface0 = node_gateway.addInterface('interface-1', pg.IPv4Address('192.168.100.1'
 
 # Node client-1
 node_client_1 = request.XenVM('client-1')
-node_client_1.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD'
+node_client_1.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
 node_client_1.startVNC()
 node_client_1.routable_control_ip = True
 node_client_1.Site("site1")
