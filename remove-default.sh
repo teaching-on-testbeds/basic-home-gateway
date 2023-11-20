@@ -16,9 +16,18 @@ read _ _ gateway _ < <(ip route list match 0/0)
 read _ _ _ _ _ _ _ _ connection _ < <(sudo lsof -i tcp -n | grep sshd | grep $USER)
 myip=$(echo $connection | cut -f2 -d ">" | cut -f1 -d":")
 
-# for CloudLab web interface
-sudo route add -net 155.98.33.0/24 gw $gateway
+# for Emulab - and all clusters need this too, for shell and VNC
+sudo ip route add $(dig +short boss.emulab.net | cut -f1-3 -d'.').0/24 via $gateway 
+sudo ip route add $(dig +short ops.emulab.net | cut -f1-3 -d'.').0/24 via $gateway
 
-sudo route add -host $myip gw $gateway
-sudo route add -net $(echo $myip | cut -f1-3 -d'.').0/24 gw $gateway
-sudo route del default gw $gateway
+# for APT - more general than strictly required, but ¯\_(ツ)_/¯
+sudo ip route add $(dig +short boss.apt.emulab.net | cut -f1-3 -d'.').0/24 via $gateway 
+sudo ip route add $(dig +short ops.apt.emulab.net | cut -f1-3 -d'.').0/24 via $gateway 
+
+# private range for virtual nodes (VMs) without routable IP addresses
+sudo ip route add 172.16.0.0/12 dev eth0
+
+# for my own network
+sudo ip route add $myip/32 via $gateway
+sudo ip route add $(echo $myip | cut -f1-3 -d'.').0/24 via $gateway
+sudo ip route del default
