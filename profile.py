@@ -27,6 +27,8 @@ iface0 = node_gateway.addInterface('interface-1', pg.IPv4Address('192.168.100.1'
 # Node client-1
 node_client_1 = request.XenVM('client-1')
 node_client_1.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
+node_client_1.addService(rspec.Execute(shell="bash", command="/usr/bin/sudo /usr/bin/apt purge firefox; /usr/bin/sudo /usr/bin/snap remove firefox; /usr/bin/sudo /usr/bin/add-apt-repository ppa:mozillateam/ppa -y ; /usr/bin/sudo /usr/bin/apt -y install firefox-esr lynx; /usr/bin/sudo /usr/bin/ln -s /usr/bin/firefox-esr /usr/local/bin/firefox"))
+
 node_client_1.startVNC()
 node_client_1.routable_control_ip = True
 node_client_1.Site("site1")
