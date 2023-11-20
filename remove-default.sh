@@ -24,6 +24,14 @@ sudo ip route add $(dig +short ops.emulab.net | cut -f1-3 -d'.').0/24 via $gatew
 sudo ip route add $(dig +short boss.apt.emulab.net | cut -f1-3 -d'.').0/24 via $gateway 
 sudo ip route add $(dig +short ops.apt.emulab.net | cut -f1-3 -d'.').0/24 via $gateway 
 
+# for Utah - more general than strictly required, but ¯\_(ツ)_/¯
+sudo ip route add $(dig +short boss.utah.cloudlab.us | cut -f1-3 -d'.').0/24 via $gateway 
+sudo ip route add $(dig +short ops.utah.cloudlab.us | cut -f1-3 -d'.').0/24 via $gateway 
+
+# for Wisconsin - more general than strictly required, but ¯\_(ツ)_/¯
+sudo ip route add $(dig +short boss.wisc.cloudlab.us | cut -f1-3 -d'.').0/24 via $gateway 
+sudo ip route add $(dig +short ops.wisc.cloudlab.us | cut -f1-3 -d'.').0/24 via $gateway 
+
 # private range for virtual nodes (VMs) without routable IP addresses
 sudo ip route add 172.16.0.0/12 dev eth0
 
