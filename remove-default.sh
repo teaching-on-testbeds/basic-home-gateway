@@ -1,9 +1,10 @@
+hn=$(hostname)
 sudo ip addr flush dev eth1
 
 # Stop DHCP client on eth0
 sudo killall dhclient
 # Set hostname to keep sudo from complaining
-sudo hostname $(hostname -s)
+sudo hostname $hn
 echo "127.0.0.1     localhost" | sudo tee /etc/hosts
 echo "127.0.0.1     $(hostname)" | sudo tee /etc/hosts -a
 # Remove university name server config
