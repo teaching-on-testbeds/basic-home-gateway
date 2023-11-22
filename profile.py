@@ -19,7 +19,7 @@ request = pc.makeRequestRSpec()
 
 # Node gateway
 node_gateway = request.XenVM('gateway')
-node_gateway.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD'
+node_gateway.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
 node_gateway.Site("site1")
 
 iface0 = node_gateway.addInterface('interface-1', pg.IPv4Address('192.168.100.1','255.255.255.0'))
@@ -37,7 +37,7 @@ iface1 = node_client_1.addInterface('interface-2', pg.IPv4Address('0.0.0.0','255
 
 # Node client-2
 node_client_2 = request.XenVM('client-2')
-node_client_2.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD'
+node_client_2.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
 node_client_2.Site("site1")
 
 iface2 = node_client_2.addInterface('interface-0', pg.IPv4Address('0.0.0.0','255.255.255.0'))
@@ -45,7 +45,7 @@ iface2 = node_client_2.addInterface('interface-0', pg.IPv4Address('0.0.0.0','255
 # Node website
 node_website = request.XenVM('website')
 node_website.routable_control_ip = True
-node_website.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD'
+node_website.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
 node_website.Site("site2")
 # need two clusters - otherwise with NAT experiment it's not via default GW
 
