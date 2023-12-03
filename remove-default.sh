@@ -1,3 +1,4 @@
+sd=$(cat /etc/resolv.conf  | grep ^search  | awk '{print $2}')
 hn=$(hostname)
 sudo ip addr flush dev eth1
 
@@ -25,17 +26,26 @@ sudo ip route add $(dig +short ops.emulab.net | cut -f1-3 -d'.').0/24 via $gatew
 sudo ip route add $(dig +short boss.apt.emulab.net | cut -f1-3 -d'.').0/24 via $gateway 
 sudo ip route add $(dig +short ops.apt.emulab.net | cut -f1-3 -d'.').0/24 via $gateway 
 
-# for Utah - more general than strictly required, but ¯\_(ツ)_/¯
-sudo ip route add $(dig +short boss.utah.cloudlab.us | cut -f1-3 -d'.').0/24 via $gateway 
-sudo ip route add $(dig +short ops.utah.cloudlab.us | cut -f1-3 -d'.').0/24 via $gateway 
+if [[ $sd == "utah.cloudlab.us" ]]
+then
+  # for Utah - more general than strictly required, but ¯\_(ツ)_/¯
+  sudo ip route add $(dig +short boss.utah.cloudlab.us | cut -f1-3 -d'.').0/24 via $gateway 
+  sudo ip route add $(dig +short ops.utah.cloudlab.us | cut -f1-3 -d'.').0/24 via $gateway 
+fi
 
-# for Wisconsin - more general than strictly required, but ¯\_(ツ)_/¯
-sudo ip route add $(dig +short boss.wisc.cloudlab.us | cut -f1-3 -d'.').0/24 via $gateway 
-sudo ip route add $(dig +short ops.wisc.cloudlab.us | cut -f1-3 -d'.').0/24 via $gateway 
+if [[ $sd == "wisc.cloudlab.us" ]]
+then
+  # for Wisconsin - more general than strictly required, but ¯\_(ツ)_/¯
+  sudo ip route add $(dig +short boss.wisc.cloudlab.us | cut -f1-3 -d'.').0/24 via $gateway 
+  sudo ip route add $(dig +short ops.wisc.cloudlab.us | cut -f1-3 -d'.').0/24 via $gateway 
+fi
 
-# for Clemson - more general than strictly required, but ¯\_(ツ)_/¯
-sudo ip route add $(dig +short boss.clemson.cloudlab.us | cut -f1-3 -d'.').0/24 via $gateway 
-sudo ip route add $(dig +short ops.clemson.cloudlab.us | cut -f1-3 -d'.').0/24 via $gateway 
+if [[ $sd == "clemson.cloudlab.us" ]]
+then
+  # for Clemson - more general than strictly required, but ¯\_(ツ)_/¯
+  sudo ip route add $(dig +short boss.clemson.cloudlab.us | cut -f1-3 -d'.').0/24 via $gateway 
+  sudo ip route add $(dig +short ops.clemson.cloudlab.us | cut -f1-3 -d'.').0/24 via $gateway 
+fi
 
 # private range for virtual nodes (VMs) without routable IP addresses
 sudo ip route add 172.16.0.0/12 dev eth0
